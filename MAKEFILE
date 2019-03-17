@@ -1,0 +1,8 @@
+SRC = main.c arrayforfrequency.c 
+OBJ = main.o arrayforfrequency.o
+PROG = wordfreak
+
+$(PROG): $(OBJ)
+		gcc -g $(OBJ) -o $(PROG)
+
+$(OBJ): $(SRC)
