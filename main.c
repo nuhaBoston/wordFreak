@@ -9,7 +9,7 @@
 
 int isAlpha(char alpha);
 
-char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
+char* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord);
 
 /*i need to open the txt read it and count the word frequencies and then write another txt to count the frequencies*/
 
@@ -37,7 +37,7 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
                exit(1);
            }
            else {
-               bufferWord(BUFFER,argc,argv);
+               bufferWord(BUFFER,argc,argv,HeadWord);
 
            }
         
@@ -62,7 +62,7 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
             exit(1);
         }
         else{
-       bufferWord(BUFFER,argc, argv); }
+       bufferWord(BUFFER,argc, argv, HeadWord); }
     }
 
     else{
@@ -70,7 +70,7 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
          if(fd2 < 0){
             exit(1);
         }
-        bufferWord(BUFFER,argc, argv);
+        bufferWord(BUFFER,argc, argv,HeadWord);
     }
    
       
@@ -101,7 +101,7 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
 
 //buffer to read in word char by char
-char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
+char* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord){
     int i = 0;
     int j = 0;
     //for keeping track of where in the BUFFER you are
@@ -138,8 +138,12 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
                         count++;
                     }
                     else{
-                        
+                        BUFFER[count] = NULL;
+                        char* newWord = (char*)malloc(100);
+                        strncpy(newWord,BUFFER,count);
+                        checkWord(HeadWord, newWord); 
                     }
+                    
 
               
                 }
