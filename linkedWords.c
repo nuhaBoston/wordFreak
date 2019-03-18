@@ -1,4 +1,4 @@
-#include <arrayforfrequency.h>
+#include <linkedWords.h>
 
 word* Word(char* string, int freq, word *next){
     word* newWord = (word*)malloc(sizeof(word));
@@ -15,23 +15,21 @@ word* Word(char* string, int freq, word *next){
 //if word is in the linked list
 //if it is then increase freq. else create new word
 word* checkWord(word* WordList, char* bufferWord){
-    word* prev = WordList;
+
     word* curr = WordList->next;
     
     while(curr != NULL){
         if(strcmp(curr -> string, bufferWord) == 0){
-            int num = curr -> freq;
-            num++;
-            curr -> freq = num;
+            curr -> freq++;
             return curr;
         }
         else{
-            prev = curr;
+
             curr = curr -> next;
         }
     }
     
-    curr = word(BUFFERWORD, 1, NULL);
+    curr -> next = Word(bufferWord, 1, NULL);
 
     return curr;
 

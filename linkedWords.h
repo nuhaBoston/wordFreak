@@ -14,7 +14,7 @@ typedef struct{
 
 word* Word(char* string, int freq, word *next);
 
-char* checkWord(word* Word);
+char* checkWord(word* Word, char* bufferWord);
 
 
 

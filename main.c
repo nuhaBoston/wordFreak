@@ -4,17 +4,22 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <stdio.h>
-#include "arrayforfrequency.h"
+#include "linkedWords.h"
+
+
+int isAlpha(char alpha);
+
+char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
 /*i need to open the txt read it and count the word frequencies and then write another txt to count the frequencies*/
 
 
  int main(int argc, const char *argv[]){
 
+     char BUFFER[100];
+
      //initialize word linkedlist
-    word* HeadWord = word(NULL,0,NULL);
-
-
+    word* HeadWord = Word(NULL,0,NULL);
 
   if(argc < 1){
       //means an environment or a single argument
@@ -22,7 +27,7 @@
     char* fd1 = getenv("WORD_FREAK");
     
     if(fd1 != NULL){
-       jyyou; 
+       bufferWord(BUFFER,argc, argv); 
     }
       
 
@@ -51,33 +56,68 @@
   }
  /* write(STDOUT_FILENO,&) */
 
-
+//stdin should be last
   if(argc == 1){
       //means stdin
       //means stdout
       int fd1 = open(argv[1],O_RDONLY);
-      fd1 = read(STDIN_FILENO,&BUFFER[count],1);
   }
 
 
-
- if(fd < 0){
-    exit(EXIT_FAILURE);
+//checking to see if argc is less than or equal to 
+ if(argc <= 0){
+    exit(1);
  }
-  else{
-  read(fd, article, sizeof(article)-1);
-  printf("%s", &article);
-  }
  
  close(fd);
 
 
      return 0;
+
+ 
  }
+
+
+//buffer to read in word char by char
+char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
+    int i = 0;
+    int j = 0;
+    int count = 0; 
+    int readc = 1;
+    int fd;
+    int k = 0;
+    //initialized my buffer
+    char BUFFER[100];
+    for(i = 0; i < 99; i++){
+        BUFFER[i] = (char)malloc(sizeof(char));
+    }
+    //read the words from each argument 
+    for(k = 1; k < argc; k++){
+        fd = open(argv[k], O_RDONLY);
+        if(fd == -1){
+            exit(EXIT_FAILURE);
+        }
+        else if(fd != -1){
+            int rdc = read(fd, &BUFFER[count], 1);
+            while(rdc)
+               int cdc = close(fd);
+               if(cdc == -1){
+                   exit(EXIT_FAILURE);
+               }
+            }
+        }
+    }
+
+
+    return BUFFERWORD;
+}
+ 
+
 
 //checking to see if character is actually a valid character
 //return 0 if false and 1 if true
 int isAlpha(char alpha){
+    
     if(alpha == '.'){
         return 0;
     }
@@ -96,25 +136,12 @@ int isAlpha(char alpha){
     else if(alpha == '?'){
         return 0;
     }
-    else{
+    else
         return 1;
-    }
 
-}
-//buffer to read in word char by char
-char* bufferWord(char BUFFER[100]){
-    int i = 0;
-    int j = 0;
-    int count = 0; 
-    BUFFER = (char)(calloc(100,sizeof(char)));
-    for(i = 0; i < 99; i++){
-        BUFFER[i] = (char)malloc(sizeof(char));
-    }
-    //read the words from each argument 
-    for(j = 1; j < argc; j++){
-
-    }
+}   
 
 
 
-}
+
+
