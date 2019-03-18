@@ -22,12 +22,13 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
      //initialize word linkedlist
     word* HeadWord = Word(NULL,0,NULL);
 
-    //checking to see if argc is less than or equal to 
+    //checking to see if argc is less than or equal to 0
     if(argc <= 0){
     exit(1);
     }
 
-    if(argc >= 2){
+    //checking if you more than 2 arguments 
+    if(argc > 1){
         //for one or more argument
         for(int i = 1; i < argc; i++){
            int fd = open(argv[1], O_RDONLY); 
@@ -56,11 +57,19 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
     
     if(fdEnviron != NULL){
        int fd2 = open(fdEnviron, O_RDONLY);
-        if(fd2 == )
+       //checking if it opens correctly
+        if(fd2 < 0){
+            exit(1);
+        }
+        else{
        bufferWord(BUFFER,argc, argv); }
+    }
 
     else{
         int fd2 = open(0, O_RDONLY);
+         if(fd2 < 0){
+            exit(1);
+        }
         bufferWord(BUFFER,argc, argv);
     }
    
@@ -75,30 +84,14 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
      int fd = open(argv[1],O_RDONLY);
 
-   /* for(i = 1; i < argc-1; i++){
-         while(fd)
-     }*/
-
-    
-    
-    int fd1 = open("wordFreq.c", O_RDWR);
-
-  char article[fd]; 
-
-  
- /* write(STDOUT_FILENO,&) */
-
-//stdin should be last
-  else{
-      //means stdin
-      //means stdout
-      int fd1 = open(argv[1],O_RDONLY);
-  
-  }
 
 
  
- close(fd);
+ int cd = close(fd);
+  
+  if(cd < 0){
+      exit(1);
+  }
 
 
      return 0;
@@ -109,7 +102,6 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
 //buffer to read in word char by char
 char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
-    char BUFFERWORD[]; 
     int i = 0;
     int j = 0;
     //for keeping track of where in the BUFFER you are
@@ -133,22 +125,30 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
             exit(EXIT_FAILURE);
         }
         else if(fd != -1){
-            int rd = read(fd, BUFFER[count], 1);
+            int rd = read(fd, &BUFFER[count], 1);
             if(rd == 0){
                 int cd = close(fd);
                  if(cd == -1){
                    exit(EXIT_FAILURE);
                }
             }
-            while(rd != -1){
-               int cd = close(fd);
+            else{
+                while(rd > 0){
+                    if(isAlpha(BUFFER[count])){
+                        count++;
+                    }
+                    else{
+                        
+                    }
+
               
+                }
             }
         }
     }
 
 
-    return BUFFERWORD;
+    return NULL;
 }
  
 
