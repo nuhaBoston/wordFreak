@@ -16,19 +16,54 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
  int main(int argc, const char *argv[]){
 
+
      char BUFFER[100];
 
      //initialize word linkedlist
     word* HeadWord = Word(NULL,0,NULL);
 
-  if(argc < 1){
-      //means an environment or a single argument
-         
-    char* fd1 = getenv("WORD_FREAK");
-    
-    if(fd1 != NULL){
-       bufferWord(BUFFER,argc, argv); 
+    //checking to see if argc is less than or equal to 
+    if(argc <= 0){
+    exit(1);
     }
+
+    if(argc >= 2){
+        //for one or more argument
+        for(int i = 1; i < argc; i++){
+           int fd = open(argv[1], O_RDONLY); 
+           //checks if it opens properly
+           if(fd < 0){
+               exit(1);
+           }
+           else {
+               bufferWord(BUFFER,argc,argv);
+
+           }
+        
+        }
+     }
+
+      
+      
+      
+
+
+    //means an environment or stdin argument
+
+    if(argc == 1){
+         
+    char* fdEnviron = getenv("WORD_FREAK");
+    
+    if(fdEnviron != NULL){
+       int fd2 = open(fdEnviron, O_RDONLY);
+        if(fd2 == )
+       bufferWord(BUFFER,argc, argv); }
+
+    else{
+        int fd2 = open(0, O_RDONLY);
+        bufferWord(BUFFER,argc, argv);
+    }
+   
       
 
   }
@@ -50,24 +85,18 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
   char article[fd]; 
 
-  if(argc > 2){
-      write(fd, 300, 1000);
-
-  }
+  
  /* write(STDOUT_FILENO,&) */
 
 //stdin should be last
-  if(argc == 1){
+  else{
       //means stdin
       //means stdout
       int fd1 = open(argv[1],O_RDONLY);
+  
   }
 
 
-//checking to see if argc is less than or equal to 
- if(argc <= 0){
-    exit(1);
- }
  
  close(fd);
 
@@ -80,11 +109,17 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]);
 
 //buffer to read in word char by char
 char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
+    char BUFFERWORD[]; 
     int i = 0;
     int j = 0;
+    //for keeping track of where in the BUFFER you are
     int count = 0; 
-    int readc = 1;
+    //fd is file descriptor
     int fd;
+    //rd is read int
+    int rd;
+    //cd is close int
+    int cd;
     int k = 0;
     //initialized my buffer
     char BUFFER[100];
@@ -98,12 +133,16 @@ char* bufferWord(char BUFFER[100],int argc, const char *argv[]){
             exit(EXIT_FAILURE);
         }
         else if(fd != -1){
-            int rdc = read(fd, &BUFFER[count], 1);
-            while(rdc)
-               int cdc = close(fd);
-               if(cdc == -1){
+            int rd = read(fd, BUFFER[count], 1);
+            if(rd == 0){
+                int cd = close(fd);
+                 if(cd == -1){
                    exit(EXIT_FAILURE);
                }
+            }
+            while(rd != -1){
+               int cd = close(fd);
+              
             }
         }
     }
@@ -140,6 +179,8 @@ int isAlpha(char alpha){
         return 1;
 
 }   
+
+
 
 
 
