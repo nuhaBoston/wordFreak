@@ -12,7 +12,7 @@
  int main(int argc, const char *argv[]){
 
      //initialize word linkedlist
-     word* HeadWord = word(NULL,O,NULL);
+    word* HeadWord = word(NULL,0,NULL);
 
 
 
@@ -104,10 +104,15 @@ int isAlpha(char alpha){
 //buffer to read in word char by char
 char* bufferWord(char BUFFER[100]){
     int i = 0;
+    int j = 0;
     int count = 0; 
     BUFFER = (char)(calloc(100,sizeof(char)));
     for(i = 0; i < 99; i++){
         BUFFER[i] = (char)malloc(sizeof(char));
+    }
+    //read the words from each argument 
+    for(j = 1; j < argc; j++){
+
     }
 
 
