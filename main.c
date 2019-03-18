@@ -102,8 +102,6 @@ word* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord);
 
 //buffer to read in word char by char
 word* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord){
-    int i = 0;
-    int j = 0;
     //for keeping track of where in the BUFFER you are
     int count = 0; 
     //fd is file descriptor
@@ -112,24 +110,23 @@ word* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord){
     int rd;
     //cd is close int
     int cd;
-    int k = 0;
     //initialized my buffer
     char BUFFER[100];
-    for(i = 0; i < 99; i++){
+    for(int i = 0; i < 99; i++){
         BUFFER[i] = (char)malloc(sizeof(char));
     }
     //read the words from each argument 
-    for(k = 1; k < argc; k++){
+    for(int k = 1; k < argc; k++){
         fd = open(argv[k], O_RDONLY);
         if(fd == -1){
-            exit(EXIT_FAILURE);
+            exit(1);
         }
         else if(fd != -1){
             int rd = read(fd, &BUFFER[count], 1);
             if(rd == 0){
                 int cd = close(fd);
                  if(cd == -1){
-                   exit(EXIT_FAILURE);
+                   exit(1);
                }
             }
             else{
@@ -145,8 +142,6 @@ word* bufferWord(char BUFFER[100],int argc, const char *argv[], word* HeadWord){
                         count = 0; 
                     }
 
-
-              
                 }
             }
         }
