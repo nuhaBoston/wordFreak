@@ -5,13 +5,18 @@
 
 /*hashmap to store words and their frequencies */
 
-typedef struct word{
+typedef struct{
     char* string;
     int freq;
-    struct word *next;
+    word* next;
 }word;
 
-word* newWord(char* string, int freq, word *next);
+
+word* Word(char* string, int freq, word *next);
+
+char* checkWord(word* Word);
+
+
 
 
 

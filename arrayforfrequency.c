@@ -13,10 +13,9 @@ word* Word(char* string, int freq, word *next){
     return newWord;
 }
 
-char* word_name(word* Word){
-    return Word -> string;
-}
-
-char* createNewWord(word* Word){
+//if word is in the linked list
+//if it is then increase freq. else create new word
+char* checkWord(word* Word){
     
+
 }
